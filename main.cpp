@@ -5,12 +5,16 @@
 int main()
 {
     if (!glfwInit())
+    {
+        std::cout << "Error while loading GLFW..." << std::endl;
         return -1;
+    }
 
-    GLFWwindow* p_Window = glfwCreateWindow(640, 480, "Hello World", nullptr, nullptr);
+    GLFWwindow* p_Window = glfwCreateWindow(640, 480, "Game Engine", nullptr, nullptr);
     if (!p_Window)
     {
         glfwTerminate();
+        std::cout << "Failed to create window..." << std::endl;
         return -1;
     }
 
