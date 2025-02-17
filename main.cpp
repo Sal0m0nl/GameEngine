@@ -2,6 +2,26 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
+int g_windowSizeX = 640;
+int g_windowSizeY = 480;
+
+void glfwWindowResizedCallback(GLFWwindow* p_Window, int width, int height)
+{
+    g_windowSizeX = width;
+    g_windowSizeY = height;
+
+    glViewport(0, 0, width, height);
+}
+
+void glfwPressedEscapeCallback(GLFWwindow* p_Window, int key, int scancode, int action, int mode)
+{
+    if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+    {
+        glfwSetWindowShouldClose(p_Window, true);
+    }
+}
+
+
 int main()
 {
     if (!glfwInit())
@@ -10,13 +30,16 @@ int main()
         return -1;
     }
 
-    GLFWwindow* p_Window = glfwCreateWindow(640, 480, "Game Engine", nullptr, nullptr);
+    GLFWwindow* p_Window = glfwCreateWindow(g_windowSizeX, g_windowSizeY, "Game Engine", nullptr, nullptr);
     if (!p_Window)
     {
         glfwTerminate();
         std::cout << "Failed to create window..." << std::endl;
         return -1;
     }
+
+    glfwSetWindowSizeCallback(p_Window, glfwWindowResizedCallback);
+    glfwSetKeyCallback(p_Window, glfwPressedEscapeCallback);
 
     glfwMakeContextCurrent(p_Window);
 
