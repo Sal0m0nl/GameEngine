@@ -4,3 +4,7 @@ project(GameEngine)
 set(CMAKE_CXX_STANDARD 20)
 
 add_executable(GameEngine main.cpp)
+
+#  Linking GLFW
+add_subdirectory(external/glfw)
+target_link_libraries(${PROJECT_NAME} glfw)
