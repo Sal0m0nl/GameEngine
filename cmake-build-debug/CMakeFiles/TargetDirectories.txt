@@ -1,0 +1,3 @@
+C:/Users/Sal0m0n/CLionProjects/GameEngine/cmake-build-debug/CMakeFiles/GameEngine.dir
+C:/Users/Sal0m0n/CLionProjects/GameEngine/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/Sal0m0n/CLionProjects/GameEngine/cmake-build-debug/CMakeFiles/rebuild_cache.dir
