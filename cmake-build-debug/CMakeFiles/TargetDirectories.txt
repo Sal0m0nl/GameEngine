@@ -26,3 +26,10 @@ C:/Users/Sal0m0n/CLionProjects/GameEngine/cmake-build-debug/external/glfw/docs/C
 C:/Users/Sal0m0n/CLionProjects/GameEngine/cmake-build-debug/external/glfw/docs/CMakeFiles/install.dir
 C:/Users/Sal0m0n/CLionProjects/GameEngine/cmake-build-debug/external/glfw/docs/CMakeFiles/install/local.dir
 C:/Users/Sal0m0n/CLionProjects/GameEngine/cmake-build-debug/external/glfw/docs/CMakeFiles/install/strip.dir
+C:/Users/Sal0m0n/CLionProjects/GameEngine/cmake-build-debug/external/glad/CMakeFiles/glad.dir
+C:/Users/Sal0m0n/CLionProjects/GameEngine/cmake-build-debug/external/glad/CMakeFiles/edit_cache.dir
+C:/Users/Sal0m0n/CLionProjects/GameEngine/cmake-build-debug/external/glad/CMakeFiles/rebuild_cache.dir
+C:/Users/Sal0m0n/CLionProjects/GameEngine/cmake-build-debug/external/glad/CMakeFiles/list_install_components.dir
+C:/Users/Sal0m0n/CLionProjects/GameEngine/cmake-build-debug/external/glad/CMakeFiles/install.dir
+C:/Users/Sal0m0n/CLionProjects/GameEngine/cmake-build-debug/external/glad/CMakeFiles/install/local.dir
+C:/Users/Sal0m0n/CLionProjects/GameEngine/cmake-build-debug/external/glad/CMakeFiles/install/strip.dir

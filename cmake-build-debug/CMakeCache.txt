@@ -351,6 +351,15 @@ GameEngine_IS_TOP_LEVEL:STATIC=ON
 //Value Computed by CMake
 GameEngine_SOURCE_DIR:STATIC=C:/Users/Sal0m0n/CLionProjects/GameEngine
 
+//Value Computed by CMake
+glad_BINARY_DIR:STATIC=C:/Users/Sal0m0n/CLionProjects/GameEngine/cmake-build-debug/external/glad
+
+//Value Computed by CMake
+glad_IS_TOP_LEVEL:STATIC=OFF
+
+//Value Computed by CMake
+glad_SOURCE_DIR:STATIC=C:/Users/Sal0m0n/CLionProjects/GameEngine/external/glad
+
 //The directory containing a CMake configuration file for glfw3.
 glfw3_DIR:PATH=glfw3_DIR-NOTFOUND
 
@@ -494,7 +503,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=4
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=5
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP

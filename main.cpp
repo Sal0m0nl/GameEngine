@@ -1,8 +1,9 @@
+#include <iostream>
+#include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-int main(void)
+int main()
 {
-
     if (!glfwInit())
         return -1;
 
@@ -15,8 +16,18 @@ int main(void)
 
     glfwMakeContextCurrent(p_Window);
 
+    if (!gladLoadGL())
+    {
+        std::cout << "Error while loading GLAD..." << std::endl;
+        return -1;
+    }
+
+    glClearColor(0, 1, 0, 1);
+
     while (!glfwWindowShouldClose(p_Window))
     {
+        glClear(GL_COLOR_BUFFER_BIT);
+
         glfwSwapBuffers(p_Window);
 
         glfwPollEvents();
