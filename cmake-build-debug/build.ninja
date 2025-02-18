@@ -49,12 +49,19 @@ cmake_ninja_workdir = C$:/Users/Sal0m0n/CLionProjects/GameEngine/cmake-build-deb
 
 build cmake_object_order_depends_target_GameEngine: phony || cmake_object_order_depends_target_glad cmake_object_order_depends_target_glfw
 
-build CMakeFiles/GameEngine.dir/main.cpp.obj: CXX_COMPILER__GameEngine_unscanned_Debug C$:/Users/Sal0m0n/CLionProjects/GameEngine/main.cpp || cmake_object_order_depends_target_GameEngine
-  DEP_FILE = CMakeFiles\GameEngine.dir\main.cpp.obj.d
+build CMakeFiles/GameEngine.dir/src/main.cpp.obj: CXX_COMPILER__GameEngine_unscanned_Debug C$:/Users/Sal0m0n/CLionProjects/GameEngine/src/main.cpp || cmake_object_order_depends_target_GameEngine
+  DEP_FILE = CMakeFiles\GameEngine.dir\src\main.cpp.obj.d
   FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
   INCLUDES = -IC:/Users/Sal0m0n/CLionProjects/GameEngine/external/glfw/include -IC:/Users/Sal0m0n/CLionProjects/GameEngine/external/glad/include
   OBJECT_DIR = CMakeFiles\GameEngine.dir
-  OBJECT_FILE_DIR = CMakeFiles\GameEngine.dir
+  OBJECT_FILE_DIR = CMakeFiles\GameEngine.dir\src
+
+build CMakeFiles/GameEngine.dir/src/Render/ShaderProgram.cpp.obj: CXX_COMPILER__GameEngine_unscanned_Debug C$:/Users/Sal0m0n/CLionProjects/GameEngine/src/Render/ShaderProgram.cpp || cmake_object_order_depends_target_GameEngine
+  DEP_FILE = CMakeFiles\GameEngine.dir\src\Render\ShaderProgram.cpp.obj.d
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  INCLUDES = -IC:/Users/Sal0m0n/CLionProjects/GameEngine/external/glfw/include -IC:/Users/Sal0m0n/CLionProjects/GameEngine/external/glad/include
+  OBJECT_DIR = CMakeFiles\GameEngine.dir
+  OBJECT_FILE_DIR = CMakeFiles\GameEngine.dir\src\Render
 
 
 # =============================================================================
@@ -64,7 +71,7 @@ build CMakeFiles/GameEngine.dir/main.cpp.obj: CXX_COMPILER__GameEngine_unscanned
 #############################################
 # Link the executable GameEngine.exe
 
-build GameEngine.exe: CXX_EXECUTABLE_LINKER__GameEngine_Debug CMakeFiles/GameEngine.dir/main.cpp.obj | external/glfw/src/libglfw3.a external/glad/libglad.a || external/glad/libglad.a external/glfw/src/libglfw3.a
+build GameEngine.exe: CXX_EXECUTABLE_LINKER__GameEngine_Debug CMakeFiles/GameEngine.dir/src/main.cpp.obj CMakeFiles/GameEngine.dir/src/Render/ShaderProgram.cpp.obj | external/glfw/src/libglfw3.a external/glad/libglad.a || external/glad/libglad.a external/glfw/src/libglfw3.a
   FLAGS = -g
   LINK_LIBRARIES = external/glfw/src/libglfw3.a  external/glad/libglad.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\GameEngine.dir

@@ -1,6 +1,7 @@
 #include <iostream>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include "Render/ShaderProgram.h"
 
 int g_windowSizeX = 640;
 int g_windowSizeY = 480;
@@ -80,25 +81,16 @@ int main()
 
     glClearColor(1, 0, 1, 1);
 
-    // vertex shader
-    const GLuint vertex_shader = glCreateShader(GL_VERTEX_SHADER);
-    glShaderSource(vertex_shader, 1, &vertex_shader_source, nullptr);
-    glCompileShader(vertex_shader);
+    std::string vertex_source(vertex_shader_source);
+    std::string fragment_source(fragment_shader_source);
 
-    // fragment shader
-    const GLuint fragment_shader = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(fragment_shader, 1, &fragment_shader_source, nullptr);
-    glCompileShader(fragment_shader);
+    Render::ShaderProgram shader_program(vertex_source, fragment_source);
 
-    // shader program
-    const GLuint shader_program = glCreateProgram();
-    glAttachShader(shader_program, vertex_shader);
-    glAttachShader(shader_program, fragment_shader);
-    glLinkProgram(shader_program);
-
-    // remove shaders
-    glDeleteShader(vertex_shader);
-    glDeleteShader(fragment_shader);
+    if (!shader_program.isCompiled())
+    {
+        std::cerr << "Can't create shader program" << std::endl;
+        return -1;
+    }
 
     // vertex virtual buffer object
     GLuint points_vbo;
@@ -129,7 +121,7 @@ int main()
     {
         glClear(GL_COLOR_BUFFER_BIT);
 
-        glUseProgram(shader_program);
+        shader_program.use();
         glBindVertexArray(vao);
         glDrawArrays(GL_TRIANGLES, 0, 3);
 

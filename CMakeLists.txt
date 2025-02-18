@@ -3,7 +3,10 @@ project(GameEngine)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(GameEngine main.cpp)
+add_executable(GameEngine src/main.cpp
+        src/Render/ShaderProgram.cpp
+        src/Render/ShaderProgram.h
+)
 
 #  Linking GLFW
 add_subdirectory(external/glfw)
