@@ -19,6 +19,8 @@ GLfloat colors[] = {
     0.0f, 0.0f, 1.0f,
 };
 
+
+
 void glfwWindowResizedCallback(GLFWwindow* p_Window, int width, int height)
 {
     g_windowSizeX = width;

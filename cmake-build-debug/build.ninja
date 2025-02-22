@@ -70,6 +70,13 @@ build CMakeFiles/GameEngine.dir/src/Resources/ResourceManager.cpp.obj: CXX_COMPI
   OBJECT_DIR = CMakeFiles\GameEngine.dir
   OBJECT_FILE_DIR = CMakeFiles\GameEngine.dir\src\Resources
 
+build CMakeFiles/GameEngine.dir/src/Render/Texture2D.cpp.obj: CXX_COMPILER__GameEngine_unscanned_Debug C$:/Users/Sal0m0n/CLionProjects/GameEngine/src/Render/Texture2D.cpp || cmake_object_order_depends_target_GameEngine
+  DEP_FILE = CMakeFiles\GameEngine.dir\src\Render\Texture2D.cpp.obj.d
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  INCLUDES = -IC:/Users/Sal0m0n/CLionProjects/GameEngine/external/glfw/include -IC:/Users/Sal0m0n/CLionProjects/GameEngine/external/glad/include
+  OBJECT_DIR = CMakeFiles\GameEngine.dir
+  OBJECT_FILE_DIR = CMakeFiles\GameEngine.dir\src\Render
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target GameEngine
@@ -78,7 +85,7 @@ build CMakeFiles/GameEngine.dir/src/Resources/ResourceManager.cpp.obj: CXX_COMPI
 #############################################
 # Link the executable bin\GameEngine.exe
 
-build bin/GameEngine.exe: CXX_EXECUTABLE_LINKER__GameEngine_Debug CMakeFiles/GameEngine.dir/src/main.cpp.obj CMakeFiles/GameEngine.dir/src/Render/ShaderProgram.cpp.obj CMakeFiles/GameEngine.dir/src/Resources/ResourceManager.cpp.obj | external/glfw/src/libglfw3.a external/glad/libglad.a || external/glad/libglad.a external/glfw/src/libglfw3.a
+build bin/GameEngine.exe: CXX_EXECUTABLE_LINKER__GameEngine_Debug CMakeFiles/GameEngine.dir/src/main.cpp.obj CMakeFiles/GameEngine.dir/src/Render/ShaderProgram.cpp.obj CMakeFiles/GameEngine.dir/src/Resources/ResourceManager.cpp.obj CMakeFiles/GameEngine.dir/src/Render/Texture2D.cpp.obj | external/glfw/src/libglfw3.a external/glad/libglad.a || external/glad/libglad.a external/glfw/src/libglfw3.a
   FLAGS = -g
   LINK_LIBRARIES = external/glfw/src/libglfw3.a  external/glad/libglad.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\GameEngine.dir

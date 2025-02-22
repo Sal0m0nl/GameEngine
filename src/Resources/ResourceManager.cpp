@@ -3,11 +3,12 @@
 #include <sstream>
 #include <fstream>
 #include<iostream>
-
+#include "../Render/Texture2D.h"
 
 #define STB_IMAGE_IMPLEMENTATION
 
 #include "../../res/Textures/stb_image.h"
+
 
 
 namespace ResourceManager {
@@ -58,7 +59,8 @@ namespace ResourceManager {
         return iterator->second;
     }
 
-    void ResourceManager::loadTexture(const std::string& name, const std::string& relative_path) {
+    std::shared_ptr<Render::Texture2D> ResourceManager::loadTexture(const std::string &name,
+                                                                    const std::string &relative_path) {
         int channels = 0;
         int width = 0;
         int height = 0;
@@ -68,10 +70,23 @@ namespace ResourceManager {
 
         if (!pixels) {
             std::cerr << "FAILED TO LOAD TEXTURE WITH PATH " << relative_path << std::endl;
-            return;
+            return nullptr;
         }
 
+        std::shared_ptr<Render::Texture2D> newTexture = m_textures.emplace(name, std::make_shared<Render::Texture2D>(width, height, pixels, channels)).first->second;
+
         stbi_image_free(pixels);
+
+        return newTexture;
+    }
+
+    std::shared_ptr<Render::Texture2D> ResourceManager::getTexture(const std::string &texture_name) const {
+        TexturesMap::const_iterator it = m_textures.find(texture_name);
+        if (it != m_textures.end()) {
+            return it->second;
+        }
+        std::cerr << "Can't get texture with name " << texture_name << std::endl;
+        return nullptr;
     }
 
 
