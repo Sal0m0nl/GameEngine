@@ -4,9 +4,7 @@
 #include "Render/ShaderProgram.h"
 #include "Render/Texture2D.h"
 #include "Resources/ResourceManager.h"
-
-int g_windowSizeX = 640;
-int g_windowSizeY = 480;
+#include "Window/Window.h"
 
 GLfloat points[] = {
     0.0f, 0.5f, 0.0f,
@@ -26,53 +24,11 @@ GLfloat texture_coords[] = {
     0.0f, 0.0f,
 };
 
-
-void glfwWindowResizedCallback(GLFWwindow* p_Window, int width, int height)
-{
-    g_windowSizeX = width;
-    g_windowSizeY = height;
-
-    glViewport(0, 0, width, height);
-}
-
-void glfwPressedEscapeCallback(GLFWwindow* p_Window, int key, int scancode, int action, int mode)
-{
-    if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-    {
-        glfwSetWindowShouldClose(p_Window, true);
-    }
-}
-
 int main(int argc, char** argv)
 {
     std::cout << "||||||||||||||||||||||||" << std::endl << "||Starting GameEngine!||" << std::endl << "||||||||||||||||||||||||" << std::endl;
 
-    if (!glfwInit())
-    {
-        std::cout << "Error while loading GLFW..." << std::endl;
-        return -1;
-    }
-
-    GLFWwindow* p_Window = glfwCreateWindow(g_windowSizeX, g_windowSizeY, "Game Engine", nullptr, nullptr);
-    if (!p_Window)
-    {
-        glfwTerminate();
-        std::cout << "Failed to create window..." << std::endl;
-        return -1;
-    }
-
-    glfwSetWindowSizeCallback(p_Window, glfwWindowResizedCallback);
-    glfwSetKeyCallback(p_Window, glfwPressedEscapeCallback);
-
-    glfwMakeContextCurrent(p_Window);
-
-    if (!gladLoadGL())
-    {
-        std::cout << "Error while loading GLAD..." << std::endl;
-        return -1;
-    }
-
-    glClearColor(1, 0, 1, 1);
+    Window::Window Window(640, 480, "Battle City");
 
     {
         ResourceManager::ResourceManager ResourceManager(argv[0]);
@@ -85,9 +41,7 @@ int main(int argc, char** argv)
             return -1;
         }
 
-        auto texture = ResourceManager.loadTexture("DefaultTexture", "res\\Textures\\map_8x8.png"); // map_8x8.png
-
-
+        auto texture = ResourceManager.loadTexture("DefaultTexture", "res\\Textures\\asd.png"); // map_8x8.png
 
         // vertex virtual buffer object
         GLuint points_vbo;
@@ -127,7 +81,7 @@ int main(int argc, char** argv)
         shader_program->use();
         shader_program->setInt("tex", GL_TEXTURE0);
 
-        while (!glfwWindowShouldClose(p_Window))
+        while (!glfwWindowShouldClose(Window.getWindow()))
         {
             glClear(GL_COLOR_BUFFER_BIT);
 
@@ -136,7 +90,7 @@ int main(int argc, char** argv)
             texture->bind();
             glDrawArrays(GL_TRIANGLES, 0, 3);
 
-            glfwSwapBuffers(p_Window);
+            glfwSwapBuffers(Window.getWindow());
 
             glfwPollEvents();
         }
