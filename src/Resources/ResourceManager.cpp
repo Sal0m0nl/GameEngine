@@ -73,7 +73,7 @@ namespace ResourceManager {
             return nullptr;
         }
 
-        std::shared_ptr<Render::Texture2D> newTexture = m_textures.emplace(name, std::make_shared<Render::Texture2D>(width, height, pixels, channels)).first->second;
+        std::shared_ptr<Render::Texture2D> newTexture = m_textures.emplace(name, std::make_shared<Render::Texture2D>(width, height, pixels, channels, GL_NEAREST, GL_CLAMP_TO_EDGE)).first->second;
 
         stbi_image_free(pixels);
 

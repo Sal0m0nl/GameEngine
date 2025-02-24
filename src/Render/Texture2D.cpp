@@ -20,17 +20,18 @@ namespace Render {
 
         // generate texture
         glGenTextures(1, &m_ID);
+        glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, m_ID);
 
         // settings of texture
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_BYTE, pixels);
+        glTexImage2D(GL_TEXTURE_2D, 0, m_mode, width, height, 0, m_mode, GL_UNSIGNED_BYTE, pixels);
 
 
         // texture parameters
-        glTextureParameteri(1, GL_TEXTURE_WRAP_S, wrapMode);
-        glTextureParameteri(1, GL_TEXTURE_WRAP_T, wrapMode);
-        glTextureParameteri(1, GL_TEXTURE_MIN_FILTER, filter);
-        glTextureParameteri(1, GL_TEXTURE_MAG_FILTER, filter);
+        glTextureParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, wrapMode);
+        glTextureParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, wrapMode);
+        glTextureParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, filter);
+        glTextureParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, filter);
 
         // mip map
         glGenerateMipmap(GL_TEXTURE_2D);

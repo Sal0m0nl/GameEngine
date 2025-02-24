@@ -2,6 +2,7 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include "Render/ShaderProgram.h"
+#include "Render/Texture2D.h"
 #include "Resources/ResourceManager.h"
 
 int g_windowSizeX = 640;
@@ -9,8 +10,8 @@ int g_windowSizeY = 480;
 
 GLfloat points[] = {
     0.0f, 0.5f, 0.0f,
-   0.5f, -0.5f, 0.0f,
-  -0.5f, -0.5f, 0.0f,
+    0.5f, -0.5f, 0.0f,
+   -0.5f, -0.5f, 0.0f,
 };
 
 GLfloat colors[] = {
@@ -19,6 +20,11 @@ GLfloat colors[] = {
     0.0f, 0.0f, 1.0f,
 };
 
+GLfloat texture_coords[] = {
+    0.5f, 1.0f,
+    1.0f, 0.0f,
+    0.0f, 0.0f,
+};
 
 
 void glfwWindowResizedCallback(GLFWwindow* p_Window, int width, int height)
@@ -79,7 +85,7 @@ int main(int argc, char** argv)
             return -1;
         }
 
-        ResourceManager.loadTexture("DefaultTexture", "res\\Textures\\map_16x16.png");
+        auto texture = ResourceManager.loadTexture("DefaultTexture", "res\\Textures\\map_8x8.png"); // map_8x8.png
 
 
 
@@ -95,6 +101,12 @@ int main(int argc, char** argv)
         glBindBuffer(GL_ARRAY_BUFFER, color_vbo);
         glBufferData(GL_ARRAY_BUFFER, sizeof(colors), &colors, GL_STATIC_DRAW);
 
+        // texture virtual buffer object
+        GLuint texture_vbo;
+        glGenBuffers(1, &texture_vbo);
+        glBindBuffer(GL_ARRAY_BUFFER, texture_vbo);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(texture_coords), &texture_coords, GL_STATIC_DRAW);
+
         // vertex array object
         GLuint vao;
         glGenVertexArrays(1, &vao);
@@ -108,12 +120,20 @@ int main(int argc, char** argv)
         glBindBuffer(GL_ARRAY_BUFFER, color_vbo);
         glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, nullptr);
 
+        glEnableVertexAttribArray(2);
+        glBindBuffer(GL_ARRAY_BUFFER, texture_vbo);
+        glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 0, nullptr);
+
+        shader_program->use();
+        shader_program->setInt("tex", GL_TEXTURE0);
+
         while (!glfwWindowShouldClose(p_Window))
         {
             glClear(GL_COLOR_BUFFER_BIT);
 
             shader_program->use();
             glBindVertexArray(vao);
+            texture->bind();
             glDrawArrays(GL_TRIANGLES, 0, 3);
 
             glfwSwapBuffers(p_Window);
@@ -123,6 +143,6 @@ int main(int argc, char** argv)
     }
 
     glfwTerminate();
-    std::cout << "||||||||||||||||||||||||" << std::endl << "|||Ending GameEngine!|||" << std::endl << "||||||||||||||||||||||||" << std::endl;
+    std::cout << "-----------------------" << std::endl << "||||||||||||||||||||||||" << std::endl << "|||Ending GameEngine!|||" << std::endl << "||||||||||||||||||||||||" << std::endl;
     return 0;
 }
