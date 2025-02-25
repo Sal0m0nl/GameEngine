@@ -1,15 +1,21 @@
 #include <iostream>
+
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+
 #include "Render/ShaderProgram.h"
 #include "Render/Texture2D.h"
 #include "Resources/ResourceManager.h"
 #include "Window/Window.h"
 
+#include <glm/vec2.hpp>
+#include <glm/mat4x4.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+
 GLfloat points[] = {
-    0.0f, 0.5f, 0.0f,
-    0.5f, -0.5f, 0.0f,
-   -0.5f, -0.5f, 0.0f,
+    0.0f, 50.f, 0.0f,
+    50.0f, -50.0f, 0.0f,
+   -50.0f, -50.0f, 0.0f,
 };
 
 GLfloat colors[] = {
@@ -27,8 +33,7 @@ GLfloat texture_coords[] = {
 int main(int argc, char** argv)
 {
     std::cout << "||||||||||||||||||||||||" << std::endl << "||Starting GameEngine!||" << std::endl << "||||||||||||||||||||||||" << std::endl;
-
-    Window::Window Window(640, 480, "Battle City");
+    Window::Window Window(glm::ivec2(640, 480), "Game Engine");
 
     {
         ResourceManager::ResourceManager ResourceManager(argv[0]);
@@ -81,6 +86,17 @@ int main(int argc, char** argv)
         shader_program->use();
         shader_program->setInt("tex", GL_TEXTURE0);
 
+        glm::mat4 modelMatrix_1(1.f);
+        modelMatrix_1 = glm::translate(modelMatrix_1, glm::vec3(50.f, 50.f, 0.f));
+
+        glm::mat4 modelMatrix_2(1.f);
+        modelMatrix_2 = glm::translate(modelMatrix_2, glm::vec3(590.f, 50.f, 0.f));
+
+        glm::mat4 projectionMatrix = glm::ortho(0.f, static_cast<float>(Window::Window::m_WindowSize.x), 0.f,
+                                                static_cast<float>(Window::Window::m_WindowSize.y), -100.f, 100.f);
+
+        shader_program->setMatrix4("projectionMatrix", projectionMatrix);
+
         while (!glfwWindowShouldClose(Window.getWindow()))
         {
             glClear(GL_COLOR_BUFFER_BIT);
@@ -88,7 +104,13 @@ int main(int argc, char** argv)
             shader_program->use();
             glBindVertexArray(vao);
             texture->bind();
+
+            shader_program->setMatrix4("modelMatrix", modelMatrix_1);
             glDrawArrays(GL_TRIANGLES, 0, 3);
+
+            shader_program->setMatrix4("modelMatrix", modelMatrix_2);
+            glDrawArrays(GL_TRIANGLES, 0, 3);
+
 
             glfwSwapBuffers(Window.getWindow());
 

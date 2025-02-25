@@ -4,17 +4,23 @@
 
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
+#include <glm/vec2.hpp>
 
 namespace Window {
 
-    Window::Window(int width, int height, const char* title){
+    glm::ivec2 Window::m_WindowSize;
+
+    Window::Window(glm::ivec2 WindowSize, const char* title){
+
+        m_WindowSize = WindowSize;
+
         if (!glfwInit())
         {
             std::cout << "Error while loading GLFW..." << std::endl;
             return;
         }
 
-        p_Window = glfwCreateWindow(width, height, title, nullptr, nullptr);
+        p_Window = glfwCreateWindow(WindowSize.x, WindowSize.y, title, nullptr, nullptr);
         if (!p_Window)
         {
             glfwTerminate();
@@ -33,11 +39,14 @@ namespace Window {
             return;
         }
 
-        glClearColor(1, 0, 1, 1);
+        glClearColor(0, 1, 1, 1);
     }
 
     void Window::glfwWindowResizedCallback(GLFWwindow* p_Window, int width, int height)
     {
+        m_WindowSize.x = width;
+        m_WindowSize.y = height;
+
         glViewport(0, 0, width, height);
     }
 
