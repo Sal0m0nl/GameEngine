@@ -63,6 +63,6 @@ namespace Render {
     }
 
     void Texture2D::bind() const {
-        glBindTexture(GL_TEXTURE_2D, 1);
+        glBindTexture(GL_TEXTURE_2D, m_ID);
     }
 }

@@ -46,7 +46,7 @@ int main(int argc, char** argv)
             return -1;
         }
 
-        auto texture = ResourceManager.loadTexture("DefaultTexture", "res\\Textures\\asd.png"); // map_8x8.png
+        auto texture = ResourceManager.loadTexture("DefaultTexture", "res\\Textures\\map_8x8.png"); // map_8x8.png
 
         // vertex virtual buffer object
         GLuint points_vbo;
