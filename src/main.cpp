@@ -11,6 +11,7 @@
 #include <glm/vec2.hpp>
 #include <glm/mat4x4.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include "Render/Sprite.h"
 
 GLfloat points[] = {
     0.0f, 50.f, 0.0f,
@@ -38,15 +39,26 @@ int main(int argc, char** argv)
     {
         ResourceManager::ResourceManager ResourceManager(argv[0]);
 
-        auto shader_program = ResourceManager.loadShaderProgram(
+        std::shared_ptr<Render::ShaderProgram> p_ShaderProgram = ResourceManager.loadShaderProgram(
             "TriangleShader", "res/Shaders/vertex_shader.txt", "res/Shaders/fragment_shader.txt");
 
-        if (!shader_program) {
+        if (!p_ShaderProgram) {
             std::cerr << "ERROR WHILE LOADING SHADER PROGRAM" << std::endl;
             return -1;
         }
 
-        auto texture = ResourceManager.loadTexture("DefaultTexture", "res\\Textures\\map_8x8.png"); // map_8x8.png
+        std::shared_ptr<Render::ShaderProgram> p_SpriteShaderProgram = ResourceManager.loadShaderProgram(
+    "SpritesShader", "res/Shaders/vSprite.txt", "res/Shaders/fSprite.txt");
+
+        if (!p_SpriteShaderProgram) {
+            std::cerr << "ERROR WHILE LOADING SHADER PROGRAM" << std::endl;
+            return -1;
+        }
+
+        std::shared_ptr<Render::Texture2D> texture = ResourceManager.loadTexture("DefaultTexture", "res\\Textures\\map_8x8.png");
+
+        std::shared_ptr<Render::Sprite> p_Sprite = ResourceManager.loadSprite("DefaultSprite", "DefaultTexture", "SpritesShader", 100, 100);
+        p_Sprite->setPosition(glm::vec2(270.0f, 190.0f));
 
         // vertex virtual buffer object
         GLuint points_vbo;
@@ -83,8 +95,8 @@ int main(int argc, char** argv)
         glBindBuffer(GL_ARRAY_BUFFER, texture_vbo);
         glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 0, nullptr);
 
-        shader_program->use();
-        shader_program->setInt("tex", GL_TEXTURE0);
+        p_ShaderProgram->use();
+        p_ShaderProgram->setInt("tex", GL_TEXTURE0);
 
         glm::mat4 modelMatrix_1(1.f);
         modelMatrix_1 = glm::translate(modelMatrix_1, glm::vec3(50.f, 50.f, 0.f));
@@ -95,22 +107,28 @@ int main(int argc, char** argv)
         glm::mat4 projectionMatrix = glm::ortho(0.f, static_cast<float>(Window::Window::m_WindowSize.x), 0.f,
                                                 static_cast<float>(Window::Window::m_WindowSize.y), -100.f, 100.f);
 
-        shader_program->setMatrix4("projectionMatrix", projectionMatrix);
+        p_ShaderProgram->setMatrix4("projectionMatrix", projectionMatrix);
+
+        p_SpriteShaderProgram->use();
+        p_SpriteShaderProgram->setMatrix4("projectionMatrix", projectionMatrix);
+        p_SpriteShaderProgram->setInt("tex", GL_TEXTURE0);
+
 
         while (!glfwWindowShouldClose(Window.getWindow()))
         {
             glClear(GL_COLOR_BUFFER_BIT);
 
-            shader_program->use();
+            p_ShaderProgram->use();
             glBindVertexArray(vao);
             texture->bind();
 
-            shader_program->setMatrix4("modelMatrix", modelMatrix_1);
+            p_ShaderProgram->setMatrix4("modelMatrix", modelMatrix_1);
             glDrawArrays(GL_TRIANGLES, 0, 3);
 
-            shader_program->setMatrix4("modelMatrix", modelMatrix_2);
+            p_ShaderProgram->setMatrix4("modelMatrix", modelMatrix_2);
             glDrawArrays(GL_TRIANGLES, 0, 3);
 
+            p_Sprite->render();
 
             glfwSwapBuffers(Window.getWindow());
 

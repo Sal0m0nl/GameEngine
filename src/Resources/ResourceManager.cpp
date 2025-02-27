@@ -1,9 +1,11 @@
-#include "ResourceManager.h"
-#include "../Render/ShaderProgram.h"
 #include <sstream>
 #include <fstream>
 #include<iostream>
+
 #include "../Render/Texture2D.h"
+#include "ResourceManager.h"
+#include "../Render/ShaderProgram.h"
+#include "../Render/Sprite.h"
 
 #define STB_IMAGE_IMPLEMENTATION
 
@@ -48,17 +50,6 @@ namespace ResourceManager {
         return nullptr;
     }
 
-
-
-    std::shared_ptr<Render::ShaderProgram> ResourceManager::getShaderProgram(const std::string &shader_name) const {
-        ShaderProgramsMap::const_iterator iterator = m_shaderPrograms_map.find(shader_name);
-        if (iterator == m_shaderPrograms_map.end()) {
-            std::cerr << "Can't find shader program with name " << shader_name << std::endl;
-            return nullptr;
-        }
-        return iterator->second;
-    }
-
     std::shared_ptr<Render::Texture2D> ResourceManager::loadTexture(const std::string &name,
                                                                     const std::string &relative_path) {
         int channels = 0;
@@ -80,12 +71,51 @@ namespace ResourceManager {
         return newTexture;
     }
 
+    std::shared_ptr<Render::Sprite> ResourceManager::loadSprite(const std::string &spriteName,
+        const std::string &textureName, const std::string &shaderName, const unsigned int width,
+        const unsigned int height) {
+
+        std::shared_ptr<Render::Texture2D> p_Texture = getTexture(textureName);
+        if (!p_Texture) {
+            std::cerr << "Error while loading sprite with name: " << spriteName << std::endl;
+            return nullptr;
+        }
+        std::shared_ptr<Render::ShaderProgram> p_ShaderProgram = getShaderProgram(shaderName);
+        if (!p_ShaderProgram) {
+            std::cerr << "Error while loading sprite with name: " << shaderName << std::endl;
+            return nullptr;
+        }
+
+        std::shared_ptr<Render::Sprite> newSprite = m_SpritesMap.emplace(spriteName, std::make_shared<Render::Sprite>(p_Texture, p_ShaderProgram, glm::vec2(0.0f, 0.0f), glm::vec2(width, height), 0.f)).first->second;
+
+        return newSprite;
+
+    }
+
+    std::shared_ptr<Render::ShaderProgram> ResourceManager::getShaderProgram(const std::string &shader_name) const {
+        ShaderProgramsMap::const_iterator iterator = m_shaderPrograms_map.find(shader_name);
+        if (iterator == m_shaderPrograms_map.end()) {
+            std::cerr << "Can't find shader program with name " << shader_name << std::endl;
+            return nullptr;
+        }
+        return iterator->second;
+    }
+
     std::shared_ptr<Render::Texture2D> ResourceManager::getTexture(const std::string &texture_name) const {
         TexturesMap::const_iterator it = m_textures.find(texture_name);
         if (it != m_textures.end()) {
             return it->second;
         }
         std::cerr << "Can't get texture with name " << texture_name << std::endl;
+        return nullptr;
+    }
+
+    std::shared_ptr<Render::Sprite> ResourceManager::getSprite(const std::string &sprite_name) const {
+        SpritesMap::const_iterator it = m_SpritesMap.find(sprite_name);
+        if (it != m_SpritesMap.end()) {
+            return it->second;
+        }
+        std::cerr << "Can't get sprite with name " << sprite_name << std::endl;
         return nullptr;
     }
 

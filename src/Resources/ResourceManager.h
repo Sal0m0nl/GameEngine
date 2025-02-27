@@ -4,9 +4,11 @@
 #include <memory>
 #include <string>
 
+
 namespace Render {
     class Texture2D;
     class ShaderProgram;
+    class Sprite;
 }
 
 namespace ResourceManager
@@ -25,8 +27,12 @@ namespace ResourceManager
         std::shared_ptr<Render::ShaderProgram> getShaderProgram(const std::string& shader_name) const;
 
         std::shared_ptr<Render::Texture2D> loadTexture(const std::string& name, const std::string& relative_path);
+        std::shared_ptr<Render::Sprite> loadSprite(const std::string& spriteName, const std::string& textureName, const std::string& shaderName, const unsigned int width, const unsigned int height);
+
 
         std::shared_ptr<Render::Texture2D> getTexture(const std::string &texture_name) const;
+        std::shared_ptr<Render::Sprite> getSprite(const std::string &sprite_name) const;
+
 
 
     private:
@@ -37,6 +43,9 @@ namespace ResourceManager
 
         typedef std::map<const std::string, std::shared_ptr<Render::Texture2D>> TexturesMap;
         TexturesMap m_textures;
+
+        typedef std::map<const std::string, std::shared_ptr<Render::Sprite>> SpritesMap;
+        SpritesMap m_SpritesMap;
 
         std::string m_path;
     };
