@@ -3,6 +3,7 @@
 #include <map>
 #include <memory>
 #include <string>
+#include <vector>
 
 
 namespace Render {
@@ -27,13 +28,13 @@ namespace ResourceManager
         std::shared_ptr<Render::ShaderProgram> getShaderProgram(const std::string& shader_name) const;
 
         std::shared_ptr<Render::Texture2D> loadTexture(const std::string& name, const std::string& relative_path);
-        std::shared_ptr<Render::Sprite> loadSprite(const std::string& spriteName, const std::string& textureName, const std::string& shaderName, const unsigned int width, const unsigned int height);
+        std::shared_ptr<Render::Sprite> loadSprite(const std::string& spriteName, const std::string& textureName, const std::string& shaderName, const std::string& subTextureName, const unsigned int width, const unsigned int height);
 
 
         std::shared_ptr<Render::Texture2D> getTexture(const std::string &texture_name) const;
         std::shared_ptr<Render::Sprite> getSprite(const std::string &sprite_name) const;
 
-
+        std::shared_ptr<Render::Texture2D> loadTextuteAtlas(const std::string& texture_name, const std::string& relative_path, const std::vector<std::string> subTextures, const unsigned int subTextureWidth, const unsigned int subTextureHeight);
 
     private:
         std::string getStringFromFile(const std::string& relative_path_to_file) const;

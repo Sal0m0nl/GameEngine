@@ -2,6 +2,9 @@
 #include <glm/mat4x4.hpp>
 
 #include "Sprite.h"
+
+#include <iostream>
+
 #include "glad/glad.h"
 #include "ShaderProgram.h"
 #include "Texture2D.h"
@@ -10,7 +13,7 @@
 
 namespace Render {
 
-    Sprite::Sprite(const std::shared_ptr<Texture2D> p_Texture, const std::shared_ptr<ShaderProgram> p_ShaderProgram,
+    Sprite::Sprite(const std::shared_ptr<Texture2D> p_Texture, const std::string& initialSubTexture2D, const std::shared_ptr<ShaderProgram> p_ShaderProgram,
         const glm::vec2 &position, const glm::vec2 &size, const float rotation) :
                                 m_pTexture(std::move(p_Texture)),
                                 m_pShaderProgram(std::move(p_ShaderProgram)),
@@ -28,14 +31,18 @@ namespace Render {
             0.0f, 0.0f,
         };
 
-        const GLfloat textureCoords[] = {
-            0.0f, 0.0f,
-            0.0f, 1.0f,
-            1.0f, 1.0f,
+        const Texture2D::SubTexture2D& p_SubTexture = p_Texture->getSubTexture(std::move(initialSubTexture2D));
 
-            1.0f, 1.0f,
-            1.0f, 0.0f,
-            0.0f, 0.0f,
+        const GLfloat textureCoords[] = {
+            // first triangle
+            p_SubTexture.leftBottomUV.x, p_SubTexture.leftBottomUV.y,
+            p_SubTexture.leftBottomUV.x, p_SubTexture.rightTopUV.y,
+            p_SubTexture.rightTopUV.x, p_SubTexture.rightTopUV.y,
+
+            // second triangle
+            p_SubTexture.rightTopUV.x, p_SubTexture.rightTopUV.y,
+            p_SubTexture.rightTopUV.x, p_SubTexture.leftBottomUV.y,
+            p_SubTexture.leftBottomUV.x, p_SubTexture.leftBottomUV.y,
         };
 
         // VAO

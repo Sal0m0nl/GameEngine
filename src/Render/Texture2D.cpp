@@ -1,4 +1,7 @@
 #include "Texture2D.h"
+
+#include <iostream>
+#include <memory>
 #include <glad/glad.h>
 
 
@@ -60,6 +63,27 @@ namespace Render {
         m_width = texture_2d.m_width;
         m_height = texture_2d.m_height;
         return *this;
+    }
+
+    void Texture2D::addSubTexture(const std::string &name, const glm::vec2 leftBottomUV, const glm::vec2 rightTopUV) {
+        m_subTextures.emplace(std::move(name), SubTexture2D(leftBottomUV, rightTopUV));
+    }
+
+    const Texture2D::SubTexture2D& Texture2D::getSubTexture(const std::string &name) const {
+        auto it = m_subTextures.find(name);
+        if (it != m_subTextures.end()) {
+            return it->second;
+        }
+        const static SubTexture2D defaultSubTexture;
+        return defaultSubTexture;
+    }
+
+    const unsigned int& Texture2D::getWidth() const {
+        return m_width;
+    }
+
+    const unsigned int& Texture2D::getHeight() const {
+        return m_height;
     }
 
     void Texture2D::bind() const {
