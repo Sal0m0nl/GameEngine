@@ -10,6 +10,7 @@ namespace Render {
     class Texture2D;
     class ShaderProgram;
     class Sprite;
+    class AnimatedSprite;
 }
 
 namespace ResourceManager
@@ -24,15 +25,18 @@ namespace ResourceManager
         ResourceManager& operator=(ResourceManager&&) = delete;
         ResourceManager(ResourceManager&&) = delete;
 
-        std::shared_ptr<Render::ShaderProgram> loadShaderProgram(const std::string& shader_name, const std::string& vertex_shader_path, const std::string& fragment_shader_path);
-        std::shared_ptr<Render::ShaderProgram> getShaderProgram(const std::string& shader_name) const;
 
+        std::shared_ptr<Render::ShaderProgram> loadShaderProgram(const std::string& shader_name, const std::string& vertex_shader_path, const std::string& fragment_shader_path);
         std::shared_ptr<Render::Texture2D> loadTexture(const std::string& name, const std::string& relative_path);
         std::shared_ptr<Render::Sprite> loadSprite(const std::string& spriteName, const std::string& textureName, const std::string& shaderName, const std::string& subTextureName, const unsigned int width, const unsigned int height);
+        std::shared_ptr<Render::AnimatedSprite> loadAnimatedSprite(const std::string& spriteName, const std::string& textureName, const std::string& shaderName, const std::string& subTextureName, const unsigned int width, const unsigned int height);
 
 
         std::shared_ptr<Render::Texture2D> getTexture(const std::string &texture_name) const;
         std::shared_ptr<Render::Sprite> getSprite(const std::string &sprite_name) const;
+        std::shared_ptr<Render::AnimatedSprite> getAnimatedSprite(const std::string &sprite_name) const;
+        std::shared_ptr<Render::ShaderProgram> getShaderProgram(const std::string& shader_name) const;
+
 
         std::shared_ptr<Render::Texture2D> loadTextuteAtlas(const std::string& texture_name, const std::string& relative_path, const std::vector<std::string> subTextures, const unsigned int subTextureWidth, const unsigned int subTextureHeight);
 
@@ -47,6 +51,9 @@ namespace ResourceManager
 
         typedef std::map<const std::string, std::shared_ptr<Render::Sprite>> SpritesMap;
         SpritesMap m_SpritesMap;
+
+        typedef std::map<const std::string, std::shared_ptr<Render::AnimatedSprite>> AnimatedSpritesMap;
+        AnimatedSpritesMap m_AnimatedSpritesMap;
 
         std::string m_path;
     };

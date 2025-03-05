@@ -6,9 +6,9 @@
 #include "ResourceManager.h"
 #include "../Render/ShaderProgram.h"
 #include "../Render/Sprite.h"
+#include "../Render/AnimatedSprite.h"
 
 #define STB_IMAGE_IMPLEMENTATION
-
 #include "../../res/Textures/stb_image.h"
 
 
@@ -82,7 +82,7 @@ namespace ResourceManager {
         }
         std::shared_ptr<Render::ShaderProgram> p_ShaderProgram = getShaderProgram(shaderName);
         if (!p_ShaderProgram) {
-            std::cerr << "Error while loading sprite with name: " << shaderName << std::endl;
+            std::cerr << "Error while loading sprite's shader with name: " << shaderName << std::endl;
             return nullptr;
         }
 
@@ -90,6 +90,65 @@ namespace ResourceManager {
 
         return newSprite;
 
+    }
+
+    std::shared_ptr<Render::AnimatedSprite> ResourceManager::loadAnimatedSprite(const std::string &spriteName,
+                                             const std::string &textureName, const std::string &shaderName,
+                                             const std::string &subTextureName,
+                                             const unsigned int width,
+                                             const unsigned int height) {
+        std::shared_ptr<Render::Texture2D> p_Texture = getTexture(textureName);
+        if (!p_Texture) {
+            std::cerr << "Error while loading animated sprite with name: " << spriteName << std::endl;
+            return nullptr;
+        }
+        std::shared_ptr<Render::ShaderProgram> p_ShaderProgram = getShaderProgram(shaderName);
+        if (!p_ShaderProgram) {
+            std::cerr << "Error while loading animated sprite's shader: " << shaderName << std::endl;
+            return nullptr;
+        }
+
+        std::shared_ptr<Render::AnimatedSprite> newAnimatedSprite = m_AnimatedSpritesMap.emplace(
+                                                                    spriteName,
+                                                                    std::make_shared<Render::AnimatedSprite>(p_Texture,
+                                                                                                               subTextureName,
+                                                                                                               p_ShaderProgram,
+                                                                                                                glm::vec2(0.0f, 0.0f),
+                                                                                                                glm::vec2(width, height),
+                                                                                                                         0.f)).first->second;
+
+        return newAnimatedSprite;
+
+    }
+
+    std::shared_ptr<Render::Texture2D> ResourceManager::loadTextuteAtlas(const std::string &texture_name,
+                                                                     const std::string &relative_path, const std::vector<std::string> subTextures, const unsigned int subTextureWidth,
+                                                                     const unsigned int subTextureHeight) {
+
+        std::shared_ptr<Render::Texture2D> p_Texture = loadTexture(std::move(texture_name), std::move(relative_path));
+
+        if (p_Texture) {
+            const unsigned int textureWidth = p_Texture->getWidth();
+            const unsigned int textureHeight = p_Texture->getHeight();
+
+            unsigned int currentTextureOffsetX = 0;
+            unsigned int currentTextureOffsetY = textureHeight;
+
+            for (const std::string& currentSubTexture : subTextures) {
+                glm::vec2 leftBottomUV(static_cast<float>(currentTextureOffsetX) / textureWidth, static_cast<float>(currentTextureOffsetY - subTextureHeight) / textureHeight);
+                glm::vec2 rightTopUV(static_cast<float>(currentTextureOffsetX + subTextureWidth) / textureWidth, static_cast<float>(currentTextureOffsetY) / textureHeight);
+
+                currentTextureOffsetX += subTextureWidth;
+                if (currentTextureOffsetX >= textureWidth) {
+                    currentTextureOffsetX = 0;
+                    currentTextureOffsetY -= subTextureHeight;
+                }
+
+                p_Texture->addSubTexture(std::move(currentSubTexture), leftBottomUV, rightTopUV);
+            }
+
+        }
+        return p_Texture;
     }
 
     std::shared_ptr<Render::ShaderProgram> ResourceManager::getShaderProgram(const std::string &shader_name) const {
@@ -119,36 +178,14 @@ namespace ResourceManager {
         return nullptr;
     }
 
-    std::shared_ptr<Render::Texture2D> ResourceManager::loadTextuteAtlas(const std::string &texture_name,
-        const std::string &relative_path, const std::vector<std::string> subTextures, const unsigned int subTextureWidth,
-        const unsigned int subTextureHeight) {
-
-        std::shared_ptr<Render::Texture2D> p_Texture = loadTexture(std::move(texture_name), std::move(relative_path));
-
-        if (p_Texture) {
-            const unsigned int textureWidth = p_Texture->getWidth();
-            const unsigned int textureHeight = p_Texture->getHeight();
-
-            unsigned int currentTextureOffsetX = 0;
-            unsigned int currentTextureOffsetY = textureHeight;
-
-            for (const std::string& currentSubTexture : subTextures) {
-                glm::vec2 leftBottomUV(static_cast<float>(currentTextureOffsetX) / textureWidth, static_cast<float>(currentTextureOffsetY - subTextureHeight) / textureHeight);
-                glm::vec2 rightTopUV(static_cast<float>(currentTextureOffsetX + subTextureWidth) / textureWidth, static_cast<float>(currentTextureOffsetY) / textureHeight);
-
-                currentTextureOffsetX += subTextureWidth;
-                if (currentTextureOffsetX >= textureWidth) {
-                    currentTextureOffsetX = 0;
-                    currentTextureOffsetY -= subTextureHeight;
-                }
-
-                p_Texture->addSubTexture(std::move(currentSubTexture), leftBottomUV, rightTopUV);
-            }
-
+    std::shared_ptr<Render::AnimatedSprite> ResourceManager::getAnimatedSprite(const std::string &sprite_name) const {
+        AnimatedSpritesMap::const_iterator it = m_AnimatedSpritesMap.find(sprite_name);
+        if (it != m_AnimatedSpritesMap.end()) {
+            return it->second;
         }
-        return p_Texture;
+        std::cerr << "Can't get animated sprite with name " << sprite_name << std::endl;
+        return nullptr;
     }
-
 
     std::string ResourceManager::getStringFromFile(const std::string& relative_path_to_file) const {
 

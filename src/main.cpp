@@ -1,4 +1,5 @@
 #include <iostream>
+#include <chrono>
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -11,6 +12,8 @@
 #include <glm/vec2.hpp>
 #include <glm/mat4x4.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+
+#include "Render/AnimatedSprite.h"
 #include "Render/Sprite.h"
 
 GLfloat points[] = {
@@ -57,11 +60,46 @@ int main(int argc, char** argv)
 
         std::shared_ptr<Render::Texture2D> texture = ResourceManager.loadTexture("DefaultTexture", "res\\Textures\\map_8x8.png");
 
-        std::vector<std::string> subTexturesNames = {"Block", "Cobble"};
+        std::vector<std::string> subTexturesNames = {
+            "Bird",
+            "Flag",
+            "Star_1",
+            "Star_2",
+            "Star_3",
+            "Star_4",
+            "Cross_1",
+            "Cross_2",
+            "BigBoom_1_1",
+            "BigBoom_1_2",
+            "BigBoom_2_1",
+            "BigBoom_2_2",
+            "Boom_1",
+            "Boom_2",
+            "Boom_3",
+        };
         std::shared_ptr<Render::Texture2D> pTextureAtlas = ResourceManager.loadTextuteAtlas("DefaultTextureAtlas", "res\\Textures\\map_16x16.png", std::move(subTexturesNames), 16, 16);
 
-        std::shared_ptr<Render::Sprite> p_Sprite = ResourceManager.loadSprite("DefaultSprite", "DefaultTextureAtlas", "SpritesShader", "Cobble", 200, 200);
-        p_Sprite->setPosition(glm::vec2(320.0f, 40.0f));
+        std::shared_ptr<Render::Sprite> p_Sprite = ResourceManager.loadSprite("DefaultSprite", "DefaultTextureAtlas", "SpritesShader", "Star_1", 200, 100);
+        p_Sprite->setPosition(glm::vec2(0.0f, 0.0f));
+
+        std::shared_ptr<Render::AnimatedSprite> p_animatedSprite = ResourceManager.loadAnimatedSprite("DefaultAnimatedSprite", "DefaultTextureAtlas", "SpritesShader", "Flag", 400, 400);
+
+        std::vector<std::pair<std::string, uint64_t>> birdStates;
+        birdStates.emplace_back(std::make_pair(std::string("Bird"), 1000000000));
+        birdStates.emplace_back(std::make_pair(std::string("Flag"), 1000000000));
+
+        std::vector<std::pair<std::string, uint64_t>> boomStates;
+        boomStates.emplace_back(std::make_pair(std::string("Boom_1"), 1000000000));
+        boomStates.emplace_back(std::make_pair(std::string("Boom_2"), 1000000000));
+        boomStates.emplace_back(std::make_pair(std::string("Boom_3"), 1000000000));
+
+        p_animatedSprite->insertState(std::string("Bird"), std::move(birdStates));
+        p_animatedSprite->insertState(std::string("Boom"), std::move(boomStates));
+
+        p_animatedSprite->setState("Boom");
+
+        p_animatedSprite->setPosition(glm::vec2(300.0f, 0.0f));
+
 
         // // vertex virtual buffer object
         // GLuint points_vbo;
@@ -116,8 +154,15 @@ int main(int argc, char** argv)
         p_SpriteShaderProgram->setMatrix4("projectionMatrix", projectionMatrix);
         p_SpriteShaderProgram->setInt("tex", GL_TEXTURE0);
 
+        auto lastTime = std::chrono::high_resolution_clock::now();
+
         while (!glfwWindowShouldClose(Window.getWindow()))
         {
+            auto currentTime = std::chrono::high_resolution_clock::now();
+            uint64_t duration = std::chrono::duration_cast<std::chrono::nanoseconds>(currentTime - lastTime).count();
+            lastTime = currentTime;
+            p_animatedSprite->update(duration);
+
             glClear(GL_COLOR_BUFFER_BIT);
 
             // p_ShaderProgram->use();
@@ -131,6 +176,8 @@ int main(int argc, char** argv)
             // glDrawArrays(GL_TRIANGLES, 0, 3);
 
             p_Sprite->render();
+
+            p_animatedSprite->render();
 
             glfwSwapBuffers(Window.getWindow());
 
