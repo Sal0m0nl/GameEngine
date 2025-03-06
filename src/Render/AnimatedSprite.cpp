@@ -33,7 +33,7 @@ namespace Render {
                 p_SubTexture.leftBottomUV.x, p_SubTexture.leftBottomUV.y,
             };
 
-            glBindBuffer(GL_ARRAY_BUFFER, m_vertexCoordsVBO);
+            glBindBuffer(GL_ARRAY_BUFFER, m_textureCoordVBO);
             glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(textureCoords), &textureCoords);
             glBindBuffer(GL_ARRAY_BUFFER, 0);
             m_dirty = false;

@@ -79,8 +79,8 @@ int main(int argc, char** argv)
         };
         std::shared_ptr<Render::Texture2D> pTextureAtlas = ResourceManager.loadTextuteAtlas("DefaultTextureAtlas", "res\\Textures\\map_16x16.png", std::move(subTexturesNames), 16, 16);
 
-        std::shared_ptr<Render::Sprite> p_Sprite = ResourceManager.loadSprite("DefaultSprite", "DefaultTextureAtlas", "SpritesShader", "Star_1", 200, 100);
-        p_Sprite->setPosition(glm::vec2(0.0f, 0.0f));
+        std::shared_ptr<Render::Sprite> p_Sprite = ResourceManager.loadSprite("DefaultSprite", "DefaultTextureAtlas", "SpritesShader", "Bird", 200, 100);
+        //p_Sprite->setPosition(glm::vec2(0.0f, 0.0f));
 
         std::shared_ptr<Render::AnimatedSprite> p_animatedSprite = ResourceManager.loadAnimatedSprite("DefaultAnimatedSprite", "DefaultTextureAtlas", "SpritesShader", "Flag", 400, 400);
 
