@@ -11,12 +11,12 @@ add_executable(GameEngine src/main.cpp
         res/Textures/stb_image.h
         src/Render/Texture2D.cpp
         src/Render/Texture2D.h
-        src/Window/Window.cpp
-        src/Window/Window.h
         src/Render/Sprite.cpp
         src/Render/Sprite.h
         src/Render/AnimatedSprite.cpp
         src/Render/AnimatedSprite.h
+        src/Game/Game.cpp
+        src/Game/Game.h
 )
 
 #  Linking GLFW
