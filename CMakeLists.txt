@@ -17,6 +17,8 @@ add_executable(GameEngine src/main.cpp
         src/Render/AnimatedSprite.h
         src/Game/Game.cpp
         src/Game/Game.h
+        src/Game/Tank.cpp
+        src/Game/Tank.h
 )
 
 #  Linking GLFW

@@ -5,7 +5,11 @@
 
 #include "glm/vec2.hpp"
 
+
 namespace GameEngine {
+
+    class Tank;
+
     class Game {
 
     public:
@@ -29,6 +33,8 @@ namespace GameEngine {
         EGameState m_eCurrentGameState;
 
         glm::ivec2 m_WindowSize;
+
+        std::unique_ptr<Tank> m_pTank;
     };
 }
 
