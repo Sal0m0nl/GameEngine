@@ -58,3 +58,12 @@
 59	1240	7631306892185934	CMakeFiles/GameEngine.dir/src/Game/Tank.cpp.obj	fe5c9ae2d2e1c20c
 23	1776	7631306891822121	CMakeFiles/GameEngine.dir/src/Game/Game.cpp.obj	2906efb354caf80c
 1776	2378	7631306909354739	bin/GameEngine.exe	a74b60f0d8a3558b
+128	1663	7632331883397795	CMakeFiles/GameEngine.dir/src/Game/Tank.cpp.obj	fe5c9ae2d2e1c20c
+115	1851	7632331883278895	CMakeFiles/GameEngine.dir/src/Render/AnimatedSprite.cpp.obj	af23cbbd35116ad0
+110	2140	7632331883229028	CMakeFiles/GameEngine.dir/src/Render/Sprite.cpp.obj	873d395037276a5
+121	2293	7632331883338737	CMakeFiles/GameEngine.dir/src/Game/Game.cpp.obj	2906efb354caf80c
+58	2605	7632331882705328	CMakeFiles/GameEngine.dir/src/main.cpp.obj	2090ca6ec93f2180
+106	3512	7632331883189156	CMakeFiles/GameEngine.dir/src/Resources/ResourceManager.cpp.obj	84d0ce6442009cbb
+3512	4420	7632331917241686	bin/GameEngine.exe	a74b60f0d8a3558b
+23	1265	7632332307593334	CMakeFiles/GameEngine.dir/src/Render/AnimatedSprite.cpp.obj	af23cbbd35116ad0
+1265	1852	7632332320020928	bin/GameEngine.exe	a74b60f0d8a3558b

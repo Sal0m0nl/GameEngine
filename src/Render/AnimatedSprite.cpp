@@ -22,15 +22,10 @@ namespace Render {
             const Texture2D::SubTexture2D& p_SubTexture = m_pTexture->getSubTexture(m_pCurrentAnimationDuration->second[m_currentFrame].first);
 
             const GLfloat textureCoords[] = {
-                // first triangle
                 p_SubTexture.leftBottomUV.x, p_SubTexture.leftBottomUV.y,
                 p_SubTexture.leftBottomUV.x, p_SubTexture.rightTopUV.y,
-                p_SubTexture.rightTopUV.x,   p_SubTexture.rightTopUV.y,
-
-                // second triangle
-                p_SubTexture.rightTopUV.x,   p_SubTexture.rightTopUV.y,
-                p_SubTexture.rightTopUV.x,   p_SubTexture.leftBottomUV.y,
-                p_SubTexture.leftBottomUV.x, p_SubTexture.leftBottomUV.y,
+                p_SubTexture.rightTopUV.x, p_SubTexture.rightTopUV.y,
+                p_SubTexture.rightTopUV.x, p_SubTexture.leftBottomUV.y,
             };
 
             glBindBuffer(GL_ARRAY_BUFFER, m_textureCoordVBO);
