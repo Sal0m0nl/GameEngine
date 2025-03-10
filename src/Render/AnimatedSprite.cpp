@@ -28,9 +28,7 @@ namespace Render {
                 p_SubTexture.rightTopUV.x, p_SubTexture.leftBottomUV.y,
             };
 
-            glBindBuffer(GL_ARRAY_BUFFER, m_textureCoordVBO);
-            glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(textureCoords), &textureCoords);
-            glBindBuffer(GL_ARRAY_BUFFER, 0);
+            m_textureCoordsBuffer.update(textureCoords, 2 * 4 * sizeof(GLfloat));
             m_dirty = false;
         }
         Sprite::render();

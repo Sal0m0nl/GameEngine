@@ -2,6 +2,7 @@
 
 #include <array>
 #include <cstdint>
+#include <memory>
 
 #include "glm/vec2.hpp"
 
@@ -9,6 +10,8 @@
 namespace GameEngine {
 
     class Tank;
+
+    class Sprite;
 
     class Game {
 

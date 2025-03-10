@@ -6,15 +6,23 @@ set(CMAKE_CXX_STANDARD 20)
 add_executable(GameEngine src/main.cpp
         src/Render/ShaderProgram.cpp
         src/Render/ShaderProgram.h
+
         src/Resources/ResourceManager.cpp
         src/Resources/ResourceManager.h
+
         res/Textures/stb_image.h
+
         src/Render/Texture2D.cpp
         src/Render/Texture2D.h
         src/Render/Sprite.cpp
         src/Render/Sprite.h
+        src/Render/VertexBuffer.cpp
+        src/Render/VertexBuffer.h
+        src/Render/IndexBuffer.cpp
+        src/Render/IndexBuffer.h
         src/Render/AnimatedSprite.cpp
         src/Render/AnimatedSprite.h
+
         src/Game/Game.cpp
         src/Game/Game.h
         src/Game/Tank.cpp

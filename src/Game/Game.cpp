@@ -1,3 +1,5 @@
+#include "Game.h"
+
 #include <iostream>
 #include <memory>
 #include <vector>
@@ -37,6 +39,7 @@ namespace GameEngine {
         if (m_pTank) {
             m_pTank->render();
         }
+
     }
 
     void Game::update(const uint64_t delta) {
