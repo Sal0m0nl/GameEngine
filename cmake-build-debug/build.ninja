@@ -98,6 +98,13 @@ build CMakeFiles/GameEngine.dir/src/Render/IndexBuffer.cpp.obj: CXX_COMPILER__Ga
   OBJECT_DIR = CMakeFiles\GameEngine.dir
   OBJECT_FILE_DIR = CMakeFiles\GameEngine.dir\src\Render
 
+build CMakeFiles/GameEngine.dir/src/Render/VertexArray.cpp.obj: CXX_COMPILER__GameEngine_unscanned_Debug C$:/Users/Sal0m0n/CLionProjects/GameEngine/src/Render/VertexArray.cpp || cmake_object_order_depends_target_GameEngine
+  DEP_FILE = CMakeFiles\GameEngine.dir\src\Render\VertexArray.cpp.obj.d
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  INCLUDES = -IC:/Users/Sal0m0n/CLionProjects/GameEngine/external/glfw/include -IC:/Users/Sal0m0n/CLionProjects/GameEngine/external/glad/include -IC:/Users/Sal0m0n/CLionProjects/GameEngine/external/glm
+  OBJECT_DIR = CMakeFiles\GameEngine.dir
+  OBJECT_FILE_DIR = CMakeFiles\GameEngine.dir\src\Render
+
 build CMakeFiles/GameEngine.dir/src/Render/AnimatedSprite.cpp.obj: CXX_COMPILER__GameEngine_unscanned_Debug C$:/Users/Sal0m0n/CLionProjects/GameEngine/src/Render/AnimatedSprite.cpp || cmake_object_order_depends_target_GameEngine
   DEP_FILE = CMakeFiles\GameEngine.dir\src\Render\AnimatedSprite.cpp.obj.d
   FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
@@ -119,6 +126,13 @@ build CMakeFiles/GameEngine.dir/src/Game/Tank.cpp.obj: CXX_COMPILER__GameEngine_
   OBJECT_DIR = CMakeFiles\GameEngine.dir
   OBJECT_FILE_DIR = CMakeFiles\GameEngine.dir\src\Game
 
+build CMakeFiles/GameEngine.dir/src/Render/VertexBufferLayout.cpp.obj: CXX_COMPILER__GameEngine_unscanned_Debug C$:/Users/Sal0m0n/CLionProjects/GameEngine/src/Render/VertexBufferLayout.cpp || cmake_object_order_depends_target_GameEngine
+  DEP_FILE = CMakeFiles\GameEngine.dir\src\Render\VertexBufferLayout.cpp.obj.d
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  INCLUDES = -IC:/Users/Sal0m0n/CLionProjects/GameEngine/external/glfw/include -IC:/Users/Sal0m0n/CLionProjects/GameEngine/external/glad/include -IC:/Users/Sal0m0n/CLionProjects/GameEngine/external/glm
+  OBJECT_DIR = CMakeFiles\GameEngine.dir
+  OBJECT_FILE_DIR = CMakeFiles\GameEngine.dir\src\Render
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target GameEngine
@@ -127,7 +141,7 @@ build CMakeFiles/GameEngine.dir/src/Game/Tank.cpp.obj: CXX_COMPILER__GameEngine_
 #############################################
 # Link the executable bin\GameEngine.exe
 
-build bin/GameEngine.exe: CXX_EXECUTABLE_LINKER__GameEngine_Debug CMakeFiles/GameEngine.dir/src/main.cpp.obj CMakeFiles/GameEngine.dir/src/Render/ShaderProgram.cpp.obj CMakeFiles/GameEngine.dir/src/Resources/ResourceManager.cpp.obj CMakeFiles/GameEngine.dir/src/Render/Texture2D.cpp.obj CMakeFiles/GameEngine.dir/src/Render/Sprite.cpp.obj CMakeFiles/GameEngine.dir/src/Render/VertexBuffer.cpp.obj CMakeFiles/GameEngine.dir/src/Render/IndexBuffer.cpp.obj CMakeFiles/GameEngine.dir/src/Render/AnimatedSprite.cpp.obj CMakeFiles/GameEngine.dir/src/Game/Game.cpp.obj CMakeFiles/GameEngine.dir/src/Game/Tank.cpp.obj | external/glfw/src/libglfw3.a external/glad/libglad.a external/glm/glm/libglm.a || external/glad/libglad.a external/glfw/src/libglfw3.a external/glm/glm/libglm.a
+build bin/GameEngine.exe: CXX_EXECUTABLE_LINKER__GameEngine_Debug CMakeFiles/GameEngine.dir/src/main.cpp.obj CMakeFiles/GameEngine.dir/src/Render/ShaderProgram.cpp.obj CMakeFiles/GameEngine.dir/src/Resources/ResourceManager.cpp.obj CMakeFiles/GameEngine.dir/src/Render/Texture2D.cpp.obj CMakeFiles/GameEngine.dir/src/Render/Sprite.cpp.obj CMakeFiles/GameEngine.dir/src/Render/VertexBuffer.cpp.obj CMakeFiles/GameEngine.dir/src/Render/IndexBuffer.cpp.obj CMakeFiles/GameEngine.dir/src/Render/VertexArray.cpp.obj CMakeFiles/GameEngine.dir/src/Render/AnimatedSprite.cpp.obj CMakeFiles/GameEngine.dir/src/Game/Game.cpp.obj CMakeFiles/GameEngine.dir/src/Game/Tank.cpp.obj CMakeFiles/GameEngine.dir/src/Render/VertexBufferLayout.cpp.obj | external/glfw/src/libglfw3.a external/glad/libglad.a external/glm/glm/libglm.a || external/glad/libglad.a external/glfw/src/libglfw3.a external/glm/glm/libglm.a
   FLAGS = -g
   LINK_LIBRARIES = external/glfw/src/libglfw3.a  external/glad/libglad.a  external/glm/glm/libglm.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\GameEngine.dir

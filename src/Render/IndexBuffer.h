@@ -16,8 +16,8 @@ namespace Render {
 
         void init(const void* data, const unsigned int size);
 
-        void bind();
-        void unbind();
+        void bind() const;
+        void unbind() const;
 
     private:
         GLuint m_Id;

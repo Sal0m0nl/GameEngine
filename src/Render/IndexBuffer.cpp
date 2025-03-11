@@ -28,11 +28,11 @@ namespace Render {
 
     }
 
-    void IndexBuffer::bind() {
+    void IndexBuffer::bind() const{
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_Id);
     }
 
-    void IndexBuffer::unbind() {
+    void IndexBuffer::unbind() const{
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
     }
 }

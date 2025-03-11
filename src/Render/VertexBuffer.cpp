@@ -35,11 +35,11 @@ namespace Render {
 
     }
 
-    void VertexBuffer::bind() {
+    void VertexBuffer::bind() const {
         glBindBuffer(GL_ARRAY_BUFFER, m_Id);
     }
 
-    void VertexBuffer::unbind() {
+    void VertexBuffer::unbind() const {
         glBindBuffer(GL_ARRAY_BUFFER, 0);
     }
 }

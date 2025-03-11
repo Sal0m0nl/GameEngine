@@ -20,6 +20,8 @@ add_executable(GameEngine src/main.cpp
         src/Render/VertexBuffer.h
         src/Render/IndexBuffer.cpp
         src/Render/IndexBuffer.h
+        src/Render/VertexArray.cpp
+        src/Render/VertexArray.h
         src/Render/AnimatedSprite.cpp
         src/Render/AnimatedSprite.h
 
@@ -27,6 +29,8 @@ add_executable(GameEngine src/main.cpp
         src/Game/Game.h
         src/Game/Tank.cpp
         src/Game/Tank.h
+        src/Render/VertexBufferLayout.cpp
+        src/Render/VertexBufferLayout.h
 )
 
 #  Linking GLFW

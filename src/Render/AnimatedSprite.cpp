@@ -24,8 +24,8 @@ namespace Render {
             const GLfloat textureCoords[] = {
                 p_SubTexture.leftBottomUV.x, p_SubTexture.leftBottomUV.y,
                 p_SubTexture.leftBottomUV.x, p_SubTexture.rightTopUV.y,
-                p_SubTexture.rightTopUV.x, p_SubTexture.rightTopUV.y,
-                p_SubTexture.rightTopUV.x, p_SubTexture.leftBottomUV.y,
+                p_SubTexture.rightTopUV.x,   p_SubTexture.rightTopUV.y,
+                p_SubTexture.rightTopUV.x,   p_SubTexture.leftBottomUV.y,
             };
 
             m_textureCoordsBuffer.update(textureCoords, 2 * 4 * sizeof(GLfloat));
