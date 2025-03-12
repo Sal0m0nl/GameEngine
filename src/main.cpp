@@ -6,10 +6,11 @@
 
 #include "Resources/ResourceManager.h"
 #include "Game/Game.h"
-#include "Render/Sprite.h"
 
 #include <glm/vec2.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+
+#include "Render/Renderer.h"
 
 
 glm::ivec2 g_WindowSize(640, 480);
@@ -21,7 +22,7 @@ void glfwWindowResizedCallback(GLFWwindow* p_Window, int width, int height)
     g_WindowSize.x = width;
     g_WindowSize.y = height;
 
-    glViewport(0, 0, width, height);
+    Render::Renderer::setViewport(width, height);
 }
 
 void glfwPressedEscapeCallback(GLFWwindow* p_Window, int key, int scancode, int action, int mode)
@@ -62,7 +63,7 @@ int main(int argc, char** argv)
         return -1;
     }
 
-    glClearColor(0, 0, 0, 1);
+    Render::Renderer::setClearColor(0,0, 0, 1);
 
     {
         ResourceManager::setExecutablePath(argv[0]);
@@ -79,7 +80,7 @@ int main(int argc, char** argv)
 
             g_game.update(duration);
 
-            glClear(GL_COLOR_BUFFER_BIT);
+            Render::Renderer::clear();
 
             g_game.render();
 

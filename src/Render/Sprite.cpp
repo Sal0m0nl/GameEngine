@@ -10,6 +10,7 @@
 #include "glm/ext/matrix_transform.hpp"
 #include "VertexBuffer.h"
 #include "IndexBuffer.h"
+#include "Renderer.h"
 
 
 namespace Render {
@@ -60,7 +61,7 @@ namespace Render {
         m_vertexArray.addBuffer(m_textureCoordsBuffer, textureCoordsLayout);
 
         // index buffer EBO
-        m_indexBuffer.init(indices, 6 * sizeof(GLuint));
+        m_indexBuffer.init(indices, 6);
 
         m_vertexArray.unbind();
         m_indexBuffer.unbind();
@@ -81,14 +82,12 @@ namespace Render {
         modelMat = glm::translate(modelMat, glm::vec3(-0.5f * m_Size.x, -0.5f * m_Size.y, 0.0f));
         modelMat = glm::scale(modelMat,     glm::vec3(m_Size, 1.0f));
 
-        m_vertexArray.bind();
         m_pShaderProgram->setMatrix4("modelMatrix", modelMat);
 
         glActiveTexture(GL_TEXTURE0);
         m_pTexture->bind();
 
-        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
-        m_vertexArray.unbind();
+        Renderer::draw(m_vertexArray, m_indexBuffer, *m_pShaderProgram);
     }
 
     void Sprite::setPosition(glm::vec2 position) {

@@ -3,10 +3,8 @@ project(GameEngine)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(GameEngine src/main.cpp
-        src/Render/ShaderProgram.cpp
-        src/Render/ShaderProgram.h
-
+add_executable(GameEngine
+        src/main.cpp
         src/Resources/ResourceManager.cpp
         src/Resources/ResourceManager.h
 
@@ -24,13 +22,18 @@ add_executable(GameEngine src/main.cpp
         src/Render/VertexArray.h
         src/Render/AnimatedSprite.cpp
         src/Render/AnimatedSprite.h
+        src/Render/VertexBufferLayout.cpp
+        src/Render/VertexBufferLayout.h
+        src/Render/Renderer.cpp
+        src/Render/Renderer.h
+        src/Render/ShaderProgram.cpp
+        src/Render/ShaderProgram.h
 
         src/Game/Game.cpp
         src/Game/Game.h
         src/Game/Tank.cpp
         src/Game/Tank.h
-        src/Render/VertexBufferLayout.cpp
-        src/Render/VertexBufferLayout.h
+
 )
 
 #  Linking GLFW
