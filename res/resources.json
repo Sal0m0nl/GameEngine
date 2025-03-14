@@ -1,0 +1,161 @@
+{
+  "shaders" : [
+    {
+
+      "name"       : "SpritesShader",
+      "filePath_v" : "res/Shaders/vSprite.txt",
+      "filePath_f" : "res/Shaders/fSprite.txt"
+
+    }
+  ],
+  "textureAtlases" : [
+    {
+      "name"              : "MapTextureAtlas",
+      "filePath"          : "res/Textures/map_16x16.png",
+      "width"             : 128,
+      "height"            : 64,
+      "subTexture width"  : 16,
+      "subTexture height" : 16,
+      "subTextures"       : [
+        "Bird",
+        "Flag",
+        "Star_1",
+        "Star_2",
+        "Star_3",
+        "Star_4",
+        "Cross_1",
+        "Cross_2",
+        "BigBoom_1_1",
+        "BigBoom_1_2",
+        "BigBoom_2_1",
+        "BigBoom_2_2",
+        "Boom_1",
+        "Boom_2",
+        "Boom_3"
+      ]
+    },
+
+    {
+      "name"              : "TanksTextureAtlas",
+      "filePath"          : "res/Textures/tanks.png",
+      "width"             : 256,
+      "height"            : 256,
+      "subTexture width"  : 16,
+      "subTexture height" : 16,
+      "subTextures"       : [
+        "YellowTankTop_1",
+        "YellowTankTop_2",
+        "YellowTankLeft_1",
+        "YellowTankLeft_2",
+        "YellowTankBottom_1",
+        "YellowTankBottom_2",
+        "YellowTankRight_1",
+        "YellowTankRight_2",
+
+        "WhiteTankTop_1",
+        "WhiteTankTop_2",
+        "WhiteTankLeft_1",
+        "WhiteTankLeft_2",
+        "WhiteTankBottom_1",
+        "WhiteTankBottom_2",
+        "WhiteTankRight_1",
+        "WhiteTankRight_2",
+
+        "GreenNormalTankTop_1",
+        "GreenNormalTankTop_2",
+        "GreenNormalTankLeft_1",
+        "GreenNormalTankLeft_2",
+        "GreenNormalTankBottom_1",
+        "GreenNormalTankBottom_2",
+        "GreenNormalTankRight_1",
+        "GreenNormalTankRight_2",
+
+        "GreenProtectedTankTop_1",
+        "GreenProtectedTankTop_2",
+        "GreenProtectedTankLeft_1",
+        "GreenProtectedTankLeft_2",
+        "GreenProtectedTankBottom_1",
+        "GreenProtectedTankBottom_2",
+        "GreenProtectedTankRight_1",
+        "GreenProtectedTankRight_2",
+
+        "RedTankTop_1",
+        "RedTankTop_2",
+        "RedTankLeft_1",
+        "RedTankLeft_2",
+        "RedTankBottom_1",
+        "RedTankBottom_2",
+        "RedTankRight_1",
+        "RedTankRight_2"
+      ]
+    }
+  ],
+
+  "animatedSprites" : [
+    {
+      "name"               : "TankAnimatedSprite",
+      "textureAtlas"       : "TanksTextureAtlas",
+      "shader"             : "SpritesShader",
+      "initialWidth"       : 100,
+      "initialHeight"      : 100,
+      "initialSubTexture"  : "YellowTankTop_2",
+      "states": [
+        {
+          "stateName"      : "tankTopState",
+          "frames"         : [
+            {
+              "subTexture" : "YellowTankTop_1",
+              "duration"   : 500000000
+            },
+
+            {
+              "subTexture" : "YellowTankTop_2",
+              "duration"   : 500000000
+            }]
+        },
+        {
+          "stateName"      : "tankBottomState",
+          "frames"         : [
+            {
+              "subTexture" : "YellowTankBottom_1",
+              "duration"   : 500000000
+            },
+            {
+              "subTexture" : "YellowTankBottom_2",
+              "duration"   : 500000000
+            }
+          ]
+        },
+        {
+          "stateName"      : "tankLeftState",
+          "frames"         : [
+            {
+              "subTexture" : "YellowTankLeft_1",
+              "duration"   : 500000000
+            },
+
+            {
+              "subTexture" : "YellowTankLeft_2",
+              "duration"   : 500000000
+            }
+          ]
+        },
+
+        {
+          "stateName"      : "tankLeftState",
+          "frames"         : [
+            {
+              "subTexture" : "YellowTankRight_1",
+              "duration"   : 500000000
+            },
+
+            {
+              "subTexture" : "YellowTankRight_2",
+              "duration"   : 500000000
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
